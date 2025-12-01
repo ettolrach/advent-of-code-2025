@@ -1,0 +1,29 @@
+// Reorder higher-order functions to take the function first.
+function Fmap(f, arr) { return Map(arr, f) }
+function Fold(f, init, arr) { return Reduce(arr, f, init) }
+
+function parseRotation(rotation) {
+    if (Left(rotation, 1) == "R") {
+        return Number(Mid(rotation, 1))
+    } else {
+        return Number("-" + Mid(rotation, 1))
+    }
+}
+function foldFunc(acc, x) {
+    var dialPos = (acc.pos + x) % 100
+    var zeroCount = acc.zeros
+    if (dialPos == 0) {
+        zeroCount += 1
+    }
+    return { pos: dialPos, zeros: zeroCount }
+}
+Text(
+    Fold(
+        foldFunc,
+        { pos: 50, zeros: 0 },
+        Fmap(
+            parseRotation,
+            Split($variables.input, FromCharCode(10), -1, true)
+        )
+    ).zeros
+)

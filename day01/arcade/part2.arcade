@@ -1,0 +1,34 @@
+// For some reason, this doesn't work despite it being the same logic as the Haskell verison...
+
+// Reorder higher-order functions to take the function first.
+function Fmap(f, arr) { return Map(arr, f) }
+function Fold(f, init, arr) { return Reduce(arr, f, init) }
+
+function parseRotation(rotation) {
+    if (Left(rotation, 1) == "R") {
+        return Number(Mid(rotation, 1))
+    } else {
+        return Number("-" + Mid(rotation, 1))
+    }
+}
+
+function foldFunc(acc, x) {
+    var dialPos = (acc.pos + x) % 100
+    var zeroCount = acc.zeros
+    if (x >= 0) {
+        zeroCount += Floor((acc.pos + x) / 100)
+    } else {
+        zeroCount += Abs(Ceil((acc.pos + x) / 100)) + Number((acc.pos != 0) && ((acc.pos + x) <= 0))
+    }
+    return { pos: dialPos, zeros: zeroCount }
+}
+Text(
+    Fold(
+        foldFunc,
+        { pos: 50, zeros: 0 },
+        Fmap(
+            parseRotation,
+            Split($variables.input, FromCharCode(10), -1, true)
+        )
+    ).zeros
+)
