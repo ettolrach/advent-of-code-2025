@@ -2,6 +2,9 @@
 */example
 *~ # for emacs
 
+# Rust
+target/
+
 # Clojure
 pom.xml
 pom.xml.asc
