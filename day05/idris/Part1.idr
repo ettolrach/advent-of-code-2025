@@ -9,10 +9,6 @@ import Decidable.Decidable
 import System.File.ReadWrite
 import System.File.Virtual
 
-export infixl 3 &&&
-(&&&) : (a -> b) -> (a -> c) -> (a -> (b, c))
-f &&& g = \a => (f a, g a)
-
 IngredientId : Type
 IngredientId = Nat
 
