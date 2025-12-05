@@ -2,6 +2,9 @@
 */example
 *~ # for emacs
 
+# Idris
+build/
+
 # Rust
 target/
 
