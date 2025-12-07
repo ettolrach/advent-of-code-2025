@@ -8,6 +8,11 @@ build/
 # Rust
 target/
 
+# Scala
+.metals/
+.bsp/
+.scala-build
+
 # Clojure
 pom.xml
 pom.xml.asc
